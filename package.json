@@ -1,0 +1,26 @@
+{
+  "name": "financy-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Finance organization API with transaction and category management - Rocketseat Tech Developer 360 challenge",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --watch src/server.ts",
+    "build": "tsdown src/server.ts",
+    "start": "node --env-file-if-exists=.env dist/server.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@apollo/server": "^5.5.1",
+    "graphql": "^16.14.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node-lts": "^24.0.0",
+    "@tsconfig/node-ts": "^23.6.4",
+    "@types/node": "^25.9.1",
+    "tsdown": "^0.22.0",
+    "typescript": "^6.0.3"
+  }
+}
