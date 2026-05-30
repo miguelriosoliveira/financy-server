@@ -1,9 +1,9 @@
-import z from "zod";
+import z from 'zod';
 
 export const env = z
 	.object({
 		PORT: z.number(),
 		JWT_SECRET: z.string().nonempty(),
-		DATABASE_URL: z.url().startsWith("file:"),
+		DATABASE_URL: z.url().startsWith('file:'),
 	})
 	.parse(process.env);
