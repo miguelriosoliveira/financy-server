@@ -1,6 +1,34 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
+import { PrismaDbClient } from './db/PrismaDbClient.ts';
 import { env } from './env.ts';
+
+const dbClient = new PrismaDbClient();
+
+async function main() {
+	await dbClient.connect();
+	// const user = await dbClient.client.user.create({
+	// 	data: {
+	// 		name: 'Alice',
+	// 		email: 'alice@prisma.iooo',
+	// 		password: 'supersecret',
+	// 	},
+	// });
+	// console.log('Created user:', user);
+
+	const allUsers = await dbClient.client.user.findMany();
+	console.log('All users:', JSON.stringify(allUsers, null, 2));
+}
+
+main()
+	.then(async () => {
+		await dbClient.disconnect();
+	})
+	.catch(async (e) => {
+		console.error(e);
+		await dbClient.disconnect();
+		process.exit(1);
+	});
 
 console.log({ env });
 
@@ -58,4 +86,4 @@ const { url } = await startStandaloneServer(server, {
 	listen: { port: env.PORT },
 });
 
-console.log(`🚀  Server ready at: ${url}`);
+console.log(`🚀 Server ready at: ${url}`);
